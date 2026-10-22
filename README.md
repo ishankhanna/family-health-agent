@@ -1,15 +1,17 @@
 # Family Health Agent
 
-A small triage harness for one household. The LLM infers *who* a message is about, *which episode* it belongs to, and what to ask next. Code owns memory and the two hard exits (emergency / doctor transfer). See [flow.md](flow.md). Product vision: [PRODUCT.md](PRODUCT.md).
+A small family health chat. The model figures out who you mean and whether this is a new problem or a follow-up. Code remembers the family, and it owns the two hard exits: emergency, or handoff to a doctor.
 
-**Seeded family:** Arjun (you), Priya (wife, 34), Aarav (son, 6), Meera (mother, 68).
+How it runs: [flow.md](flow.md). What it could become: [PRODUCT.md](PRODUCT.md).
+
+**Family in this demo:** Arjun (you), Priya (wife, 34), Aarav (son, 6), Meera (mother, 68).
 
 ## Design
 
-- **One loop, one model call.** GPT-6.1 Sol returns JSON: member, episode, facts, disposition, reply. No agent framework.
-- **LLM vs code.** The model does fuzzy work (kinship, pronouns, follow-up questions, home-care wording). `app/guardrails.py` can upgrade a turn to emergency from red-flag text and always replaces emergency/doctor copy with canned messages.
-- **State is the memory.** Members, open episodes, facts, and turns live in `household.json` and are reloaded on startup. `house.summary()` feeds that context back to the model. Follow-ups attach to an open episode; a new condition opens a new one.
-- **Extensibility, not features.** `app/hooks.py` is unused. Labs, a knowledge base, and telemedicine can plug in later without changing the loop.
+- **One loop.** Each message is one GPT-6.1 Sol call. It returns JSON: who, which episode, new facts, what to do next, and a reply. No extra framework.
+- **Split of work.** The model handles messy language (names, “he”, what to ask). `app/guardrails.py` can force an emergency from red-flag words, and always uses fixed text for emergency and doctor handoff.
+- **Memory.** Members, open problems, facts, and chat live in `household.json` and load again on startup. A follow-up sticks to an open problem. A new illness opens a new one.
+- **Room to grow.** `app/hooks.py` is empty on purpose. Lab reports, a knowledge base, and telemedicine can plug in later.
 
 ## Run
 
@@ -24,9 +26,9 @@ Copy `openai_key.txt.example` to `openai_key.txt` and paste your key (one line, 
 python3 app/cli.py
 ```
 
-Type as the parent, e.g. `My son feels warm.` Ctrl-C to exit. Each turn is saved to `household.json` so the next run continues the same household. Delete that file to start over.
+Type as the parent, e.g. `My son feels warm.` Ctrl-C to quit. Chat is saved to `household.json`. Delete that file to start over.
 
-Do not include `openai_key.txt` or `household.json` in a zip or git push. Both are gitignored.
+Do not zip or push `openai_key.txt` or `household.json`. Both are gitignored.
 
 ## Transcripts
 
