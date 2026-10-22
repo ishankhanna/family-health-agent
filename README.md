@@ -8,7 +8,7 @@ How it runs: [flow.md](flow.md). What it could become: [PRODUCT.md](PRODUCT.md).
 
 ## Design
 
-- **One loop.** Each message is one GPT-6.1 Sol call. It returns JSON: who, which episode, new facts, what to do next, and a reply. No extra framework.
+- **Not an agent.** There are no tools, no planner, no multi-step agent loop. Each message is one GPT-6.1 Sol call that returns JSON: who, which episode, new facts, what to do next, and a reply. Code does the rest.
 - **Split of work.** The model handles messy language (names, “he”, what to ask). `app/guardrails.py` can force an emergency from red-flag words, and always uses fixed text for emergency and doctor handoff.
 - **Memory.** Members, open problems, facts, and chat live in `household.json` and load again on startup. A follow-up sticks to an open problem. A new illness opens a new one.
 - **Room to grow.** `app/hooks.py` is empty on purpose. Lab reports, a knowledge base, and telemedicine can plug in later.
