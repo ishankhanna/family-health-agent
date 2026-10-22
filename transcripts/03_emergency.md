@@ -1,12 +1,12 @@
 # Scenario 3: Other member + emergency
 
-Fresh `household.json`. Arjun says “my mother” — the harness infers **Meera**, not Aarav. It gathers for a couple of turns, then **chest pain** in the user text trips the red-flag check in `guardrails.py` and the canned emergency message takes over.
+Fresh `household.json`. Arjun says “my mother” — the harness infers **Meera**, not Aarav. It gathers for a couple of turns, then **chest pain** in the user text trips the red-flag check in `app/guardrails.py` and the canned emergency message takes over.
 
 | | |
 |---|---|
 | Member | Meera (mother, 68) — inferred from “my mother” |
 | Episode | `e0afa1b9` Feeling uneasy — new episode, not Aarav’s fever |
-| Path | `gather` → `emergency` (canned copy from `guardrails.py`) |
+| Path | `gather` → `emergency` (canned copy from `app/guardrails.py`) |
 
 ## Chat
 

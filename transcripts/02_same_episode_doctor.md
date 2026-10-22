@@ -6,11 +6,11 @@ This continues scenario 1. On restart the CLI loaded `household.json`. Arjun did
 |---|---|
 | Member | Aarav — from “his” / “him”, not re-identified |
 | Episode | `9a468464` Feeling warm — **same id as scenario 1**, no new episode |
-| Path | `doctor` (canned handoff text from `guardrails.py`) |
+| Path | `doctor` (canned handoff text from `app/guardrails.py`) |
 
 ## Chat
 
-*(Prior context: Aarav, 101°F for 2 hours, drinking, alert, Crocin discussed. Then a new `python3 cli.py`.)*
+*(Prior context: Aarav, 101°F for 2 hours, drinking, alert, Crocin discussed. Then a new `python3 app/cli.py`.)*
 
 **You:** His fever is now 104F after a few hours
 

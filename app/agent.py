@@ -11,7 +11,7 @@ from openai import OpenAI
 from guardrails import apply
 from state import Household
 
-ROOT = Path(__file__).parent
+ROOT = Path(__file__).resolve().parent.parent
 MODEL = "gpt-6.1-sol"
 
 SYSTEM = """You are a family-health triage assistant for one household.

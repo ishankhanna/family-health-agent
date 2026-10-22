@@ -79,7 +79,7 @@ class Household:
         (path or STORE).write_text(json.dumps(asdict(self), indent=2))
 
 
-STORE = Path(__file__).parent / "household.json"
+STORE = Path(__file__).resolve().parent.parent / "household.json"
 
 
 def load(path: Path = STORE) -> Household:
